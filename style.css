@@ -126,7 +126,16 @@
   /* Outter Layer */
 
   .hidden{
-    display: none;
+   display: none;
+  }
+
+  .dog400 img{
+    max-width: 375px;
+    max-height: 667px;
+    position: absolute;
+    bottom: 150px;
+    left: 0;
+    z-index: 40;
   }
 
   .layer{
