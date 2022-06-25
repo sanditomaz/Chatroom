@@ -60,11 +60,15 @@
   .chat-message p{
     text-align: left;
     font-weight: 400;
-    word-break: break-all;
+    line-height: 20px;
+    word-break: break-word;
     white-space: normal;
   }
 
   .username{
+    font-weight: 700;
+  }
+  .receiver{
     font-weight: 700;
   }
 
@@ -126,7 +130,7 @@
   /* Outter Layer */
 
   .hidden{
-   display: none;
+    display: none;
   }
 
   .dog400 img{
@@ -201,6 +205,9 @@
     margin: 20px 0 0 60px;
    }
 
+   input{
+    outline: none;
+   }
 
   
 

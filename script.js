@@ -14,7 +14,7 @@ function login(){
 
     console.log(promise)
     console.log(promise)
-    promise.then(enterChat);
+    promise.then(keepingConnection);
     promise.catch(handleError);
 
 }
@@ -24,7 +24,7 @@ function keepingConnection(username){
    console.log(online);
 }
 
-login();
+//login();
 
 function handleError(error){
     //const error400 = document.querySelector(".hidden");
@@ -36,7 +36,52 @@ function handleError(error){
     }
 }
 
-function enterChat(){
-    
+function fetchMessages(){
+    const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
+
+    promise.then(displayChatroom);
+    console.log(promise)
+
+}
+
+fetchMessages();
+//setInterval(fetchMessages, 3000);
+let chatMessages;
+
+function displayChatroom(messages){
+
+    chatMessages = messages.data
+    console.log(chatMessages);
+    console.log(messages.status);
+
+    let messagesDisplayed= document.querySelector(".main");
+
+    for(let i = 0; i< chatMessages.length; i++){
+        if(chatMessages[i].type === "status"){
+            messagesDisplayed.innerHTML +=`
+            <div class="chat-message gray">
+            <p><span class="time">(${chatMessages[i].time})</span> <span class="username">${chatMessages[i].from}</span> ${chatMessages[i].text}</p>
+            </div>`
+        }
+
+        if(chatMessages[i].type === "message"){
+            messagesDisplayed.innerHTML +=`
+            <div class="chat-message white">
+            <p><span class="time">(${chatMessages[i].time})</span> <span class="username">${chatMessages[i].from}</span> para <span class="receiver">${chatMessages[i].to}: </span> ${chatMessages[i].text}</p>
+            </div>`
+        }
+
+        if(chatMessages[i].type === "private_message"){
+            messagesDisplayed.innerHTML +=`
+            <div class="chat-message red">
+            <p><span class="time">(${chatMessages[i].time})</span> <span class="username">${chatMessages[i].from}</span> reservadamente para <span class="receiver">${chatMessages[i].to}: </span> ${chatMessages[i].text}</p>
+            </div>`
+        }
+    }
+
+    let lastMessage = messagesDisplayed.lastChild;
+    lastMessage.scrollIntoView();
+
+    console.log(lastMessage);
 
 }
