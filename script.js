@@ -1,30 +1,33 @@
+let username;
+
+login();
+
 function login(){
 
     const name = prompt("What's lovely your name ?");
 
-   const username= {
+    username= {
         name: name
     }
 
-    console.log(username);
-
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", username);
 
-    //setInterval(keepingConnection, 5000, username);
+    setInterval(keepingConnection, 5000, username);
 
-    console.log(promise)
-    console.log(promise)
     promise.then(keepingConnection);
     promise.catch(handleError);
 
+    setInterval(fetchMessages, 3000);
 }
 
-function keepingConnection(username){
-   const online = axios.post("https://mock-api.driven.com.br/api/v6/uol/status",username);
-   console.log(online);
+
+
+function keepingConnection(){
+   const online = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", username);
+
 }
 
-//login();
+
 
 function handleError(error){
     //const error400 = document.querySelector(".hidden");
@@ -36,23 +39,26 @@ function handleError(error){
     }
 }
 
+
+
+
 function fetchMessages(){
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
 
     promise.then(displayChatroom);
-    console.log(promise)
+    console.log(promise);
 
 }
 
-fetchMessages();
-//setInterval(fetchMessages, 3000);
-let chatMessages;
+
+
 
 function displayChatroom(messages){
+    document.querySelector(".main").innerHTML = "";
 
-    chatMessages = messages.data
-    console.log(chatMessages);
-    console.log(messages.status);
+    
+    let chatMessages = messages.data;
+   
 
     let messagesDisplayed= document.querySelector(".main");
 
@@ -71,7 +77,7 @@ function displayChatroom(messages){
             </div>`
         }
 
-        if(chatMessages[i].type === "private_message"){
+        if(chatMessages[i].type === "private_message" && username.name === chatMessages[i].to){
             messagesDisplayed.innerHTML +=`
             <div class="chat-message red">
             <p><span class="time">(${chatMessages[i].time})</span> <span class="username">${chatMessages[i].from}</span> reservadamente para <span class="receiver">${chatMessages[i].to}: </span> ${chatMessages[i].text}</p>
@@ -82,6 +88,35 @@ function displayChatroom(messages){
     let lastMessage = messagesDisplayed.lastChild;
     lastMessage.scrollIntoView();
 
-    console.log(lastMessage);
 
 }
+
+
+
+
+function sendMessage(){
+    let typedMessage;
+    const typing = document.querySelector("textarea").value;
+
+    typedMessage = {
+        from: username.name,
+        to: "Todos",
+        text: typing,
+        type: "message"
+    }
+
+    const promise2 = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", typedMessage);
+
+    promise2.then(fetchMessages);
+    promise2.catch(refreshPage);
+    
+    document.querySelector("textarea").value = "";
+    
+
+ }
+
+
+function refreshPage(){
+    window.location.reload();
+}
+
