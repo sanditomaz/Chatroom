@@ -30,10 +30,8 @@ function keepingConnection(){
 
 
 function handleError(error){
-    //const error400 = document.querySelector(".hidden");
 
     if(error.response.status === 400){
-        //error400.classList.remove("hidden");
         alert("Sorry... This username already exists! 😥😥 \n\nPlease, choose another username...")
         login();
     }
