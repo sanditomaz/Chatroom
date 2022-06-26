@@ -40,8 +40,8 @@
     width: 100%;
     margin-bottom: 10px;
     background-color: #F3F3F3;
-    padding-top: 20px;
-    padding-bottom: 80px;
+    padding-top: 15px;
+    padding-bottom: 85px;
     overflow-y: scroll;
   }
 
@@ -104,7 +104,7 @@
   }
 
   textarea{ 
-   width: 100%;
+   width: 80vw;
    height: 50px;
    font-size: 18px;
    outline: none;
