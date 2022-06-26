@@ -1,7 +1,7 @@
-Project of a chatroom!!
+Project of a chatroom, check out below:
 
-![100x100](img/Image1.jpeg) | ![100x100](img/Image2.jpeg)
+![100x50](img/Image1.jpeg) | ![100x50](img/Image2.jpeg)
 :--------------------------:|:---------------------------:
-![100x100](img/Image3.jpeg) | ![100x100](img/Image4.jpeg)
+![100x50](img/Image3.jpeg) | ![100x50](img/Image4.jpeg)
 
 
